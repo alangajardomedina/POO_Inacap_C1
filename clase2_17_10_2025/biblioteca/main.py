@@ -1,4 +1,5 @@
 from libro import Libro
+import os, time
 
 libros = []
 usuarios = []
@@ -15,8 +16,10 @@ menu = """Menú opciones
 0. Salir"""
 
 while True:
+    os.system('cls')
     print(menu)
     opc = input("Ingrese opción: ")
+    os.system('cls')
     if opc=="1":
         try:
             print("Añadir libro")
@@ -46,15 +49,24 @@ while True:
     elif opc=="4":
         pass
     elif opc=="5":
+        if not libros:
+            print("No hay libros registrados")
+            continue
         for li in libros:
             print(li)
     elif opc=="6":
+        if not usuarios:
+            print("No hay usuarios registrados")
+            continue
         for usu in usuarios:
             print(usu)
     elif opc=="7":
-        pass
+        if not prestamos:
+            print("No hay prestamos registrados")
+            continue
     elif opc=="0":
         print("Gracias, adios!")
         break
     else:
         print("Error, opción incorrecta!")
+    time.sleep(3)
