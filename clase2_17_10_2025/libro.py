@@ -4,7 +4,7 @@ class Libro:
     __anioPublicacion = None
     __copiasDisponibles = None
 
-    def __init__(self,titulo,autor,anio,copias):
+    def __init__(self,titulo:str,autor:str,anio:int,copias:int):
         self.__titulo = titulo
         self.__autor = autor
         self.setAnioPublicacion(anio)
@@ -35,3 +35,6 @@ class Libro:
         else:
             raise ValueError("Error, las copias disponibles no pueden ser negativas")
     
+    #toString:
+    def __str__(self):
+        return f"Título: {self.__titulo} - Autor: {self.__autor} - Año: {self.__anioPublicacion}"
