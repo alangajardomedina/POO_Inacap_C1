@@ -23,3 +23,6 @@ class Prestamo:
         self.__libro = libro
     def setUsuario(self,usuario):
         self.__usuario = usuario
+
+    def __str__(self):
+        return f"Prestamo: {self.__libro} | {self.__usuario}"

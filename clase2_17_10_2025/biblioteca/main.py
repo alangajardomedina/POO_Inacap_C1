@@ -1,4 +1,7 @@
 from libro import Libro
+from prestamo import Prestamo
+from usuario import Usuario
+
 import os, time
 
 libros = []
@@ -16,6 +19,7 @@ menu = """Menú opciones
 0. Salir"""
 
 while True:
+    time.sleep(3)
     os.system('cls')
     print(menu)
     opc = input("Ingrese opción: ")
@@ -38,16 +42,54 @@ while True:
             nombre = input("Ingrese nombre: ")
             edad = int(input("Ingrese edad: "))
             numero = int(input("Ingrese número usuario: "))
-            from usuario import Usuario
             usuario = Usuario(nombre,edad,numero)
             usuarios.append(usuario)
             print("Usuario agregado con éxito!")
         except ValueError as ex:
             print(ex)
     elif opc=="3":
-        pass
+        if not libros or not usuarios:
+            print("Debes registrar libros o usuarios antes de prestamos")
+            continue
+        print("Prestar libro")
+        #1. Necesito un libro (título)
+        titulo = input("Ingrese nombre del libro a pedir: ")
+        #2. Necesito un usuario (nombre)
+        nombre_usu = input("Ingrese nombre usuario para el prestamo: ")
+        #3. Validar si existe el libro
+        libro = None
+        for li in libros:
+            if titulo==li.getTitulo() and li.getCopiasDisponibles()>=1:
+                li.restarCantidad()
+                libro = li
+                break
+        #4. Validar si existe el usuario
+        usuario = None
+        for usu in usuarios:
+            if nombre_usu==usu.getNombre():
+                usuario = usu
+                break
+        #5. Crear el prestamo
+        if not libro or not usuario:
+            print("No puedes realizar el prestamo, usuario o libro no encontrado")
+            continue
+        prestamo = Prestamo(libro,usuario)
+        #5.1 Guardar el prestamo en la lista:
+        prestamos.append(prestamo)
+        #6. Mensaje de prestamo exitoso
+        print("Prestamo creado con éxito!")
     elif opc=="4":
-        pass
+        if not prestamos:
+            print("No existen prestamos que devolver!")
+            continue
+        for index,p in enumerate(prestamos):
+            print(f"Número:{index+1} - {p}")
+        numero = int(input("\nIndique número del prestamo a devolver: "))
+        prestamo_devuelto = prestamos.pop(numero-1)
+        for li in libros:
+            if li.getTitulo()==prestamo_devuelto.getLibro().getTitulo:
+                li.sumarCantidad()
+        print("Libro devuelto con éxito")
     elif opc=="5":
         if not libros:
             print("No hay libros registrados")
@@ -64,9 +106,10 @@ while True:
         if not prestamos:
             print("No hay prestamos registrados")
             continue
+        for p in prestamos:
+            print(p)
     elif opc=="0":
         print("Gracias, adios!")
         break
     else:
         print("Error, opción incorrecta!")
-    time.sleep(3)

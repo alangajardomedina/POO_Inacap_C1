@@ -38,3 +38,10 @@ class Libro:
     #toString:
     def __str__(self):
         return f"Título: {self.__titulo} - Autor: {self.__autor} - Año: {self.__anioPublicacion}"
+
+    #método personalizado:
+    def restarCantidad(self):
+        self.__copiasDisponibles -= 1
+    
+    def sumarCantidad(self):
+        self.__copiasDisponibles += 1
