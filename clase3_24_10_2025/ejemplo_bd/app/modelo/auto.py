@@ -1,4 +1,4 @@
-from vehiculo import Vehiculo
+from app.modelo.vehiculo import Vehiculo
 
 class Auto(Vehiculo):
     __cant_puertas = 3

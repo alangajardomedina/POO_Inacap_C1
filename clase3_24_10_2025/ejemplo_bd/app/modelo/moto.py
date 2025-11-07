@@ -1,4 +1,4 @@
-from vehiculo import Vehiculo
+from app.modelo.vehiculo import Vehiculo
 
 class Moto(Vehiculo):
     __tiene_patita = True
